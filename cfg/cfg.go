@@ -74,5 +74,10 @@ func LoadCfg() *ConfigInfo {
 	if ok {
 		cfg.Db.Db = dbname
 	}
+
+	port, ok := envs["SVR_PORT"]
+	if ok {
+		cfg.Server.Port = port
+	}
 	return &cfg
 }
