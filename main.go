@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().Unix())
+	rand.NewSource(time.Now().Unix())
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	logger.SetLogger("logger.json")
