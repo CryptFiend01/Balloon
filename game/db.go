@@ -34,8 +34,8 @@ func addEnergyByWay(userId string, energy int, times int, way string) {
 	db.ExecSql(seq)
 }
 
-func saveScore(userId string, score int, scoretime int64) {
-	seq := fmt.Sprintf("update user set score=%d, score_time=%d where user_id='%s'", score, scoretime, userId)
+func saveScore(userId string, score int, scoretime int64, energy int) {
+	seq := fmt.Sprintf("update user set score=%d, score_time=%d, energy=%d where user_id='%s'", score, scoretime, energy, userId)
 	db.ExecSql(seq)
 }
 

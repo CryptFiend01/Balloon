@@ -147,8 +147,11 @@ func changeUserScore(userId string, score int) int {
 			rankDatas = append(rankDatas, user)
 		}
 		user.Score += score
+		if score >= 300 {
+			user.Energy += 1
+		}
 		user.scoreTime = time.Now().Unix()
-		saveScore(userId, score, user.scoreTime)
+		saveScore(userId, score, user.scoreTime, user.Energy)
 		sortRank()
 		return getRank(user)
 	} else {
@@ -177,7 +180,7 @@ func changeUserScore(userId string, score int) int {
 
 func getNextExplode(nextExplode int, times int) int {
 	randomValue := rand.Float64()
-	increaseValue := math.Floor(100.0/randomValue - 100.0)
+	increaseValue := math.Floor(100.0/randomValue-100.0) + 1
 	nextExplode += int(increaseValue)
 	if nextExplode > 150 && times == 1 {
 		nextExplode = 150

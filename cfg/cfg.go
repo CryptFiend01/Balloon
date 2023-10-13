@@ -22,23 +22,14 @@ type ConfigInfo struct {
 	}
 }
 
-func readFile(fileName string) []byte {
-	s, err := os.ReadFile(fileName)
-	if err != nil {
-		logger.Error("Read file %s content error[%s]", fileName, err)
-		return nil
-	}
-
-	return s
-}
-
 func LoadCfg() *ConfigInfo {
 	var cfg ConfigInfo
-	content := readFile("config.yaml")
-	if content == nil {
+	content, err := os.ReadFile("config.yaml")
+	if err != nil {
+		logger.Error("Read file config.yaml content error[%s]", err)
 		return nil
 	}
-	err := yaml.Unmarshal(content, &cfg)
+	err = yaml.Unmarshal(content, &cfg)
 	if err != nil {
 		logger.Error("parse config.yaml error: %v", err)
 		return nil
